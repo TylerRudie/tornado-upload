@@ -1,7 +1,7 @@
 import tornado.httpserver, tornado.ioloop, tornado.options, tornado.web, os.path, random, string
 from tornado.options import define, options
 
-define("port", default=8888, help="run on the given port", type=int)
+define("port", default=8080, help="run on the given port", type=int)
 
 class Application(tornado.web.Application):
     def __init__(self):
@@ -22,7 +22,7 @@ class UploadHandler(tornado.web.RequestHandler):
         extension = os.path.splitext(original_fname)[1]
         fname = ''.join(random.choice(string.ascii_lowercase + string.digits) for x in range(6))
         final_filename= fname+extension
-        output_file = open("uploads/" + final_filename, 'w')
+        output_file = open("uploadedFiles/" + final_filename, 'w')
         output_file.write(file1['body'])
         self.finish("file" + final_filename + " is uploaded")
         
